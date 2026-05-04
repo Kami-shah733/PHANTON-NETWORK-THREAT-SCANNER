@@ -204,11 +204,14 @@ export default function App() {
               <div className="p-sec-bar"></div>
               Port Analysis
             </div>
-            <span className="p-sec-badge">
-              {scanResult
-                ? `${scanResult.ports.filter(p => p.status === "open").length} open / ${scanResult.ports.length} scanned`
-                : "—"}
-            </span>
+          <span className="p-sec-badge">
+  {scanResult
+    ? `${scanResult.ports.filter(p => p.status === "open").length} open / 
+       ${scanResult.ports.filter(p => p.status === "filtered").length} filtered / 
+       ${scanResult.ports.filter(p => p.status === "closed").length} closed / 
+       ${scanResult.ports.length} total`
+    : "—"}
+</span>
           </div>
 
           {/* PORT TABLE */}
