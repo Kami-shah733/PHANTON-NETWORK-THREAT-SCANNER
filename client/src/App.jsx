@@ -25,7 +25,7 @@ export default function App() {
     "Calculating risk score...",
   ];
 
-  const handleScan = async (ip) => {
+  const handleScan = async (ip,scanType) => {
     setLoading(true);
     setScanResult(null);
     setScanStatus("Scanning...");
@@ -38,6 +38,8 @@ export default function App() {
     try {
       const response = await axios.post("http://localhost:8000/scan", {
         target_ip: ip,
+        scan_type: scanType,
+
       });
       clearInterval(interval);
       setScanResult(response.data);
@@ -179,7 +181,7 @@ export default function App() {
                     style={{
                       width: `${scanResult.risk_score}%`,
                       background:
-                        scanResult.risk_score >= 70 ? "var(--red)" :
+                        scanResult.risk_score >= 60 ? "var(--red)" :
                         scanResult.risk_score >= 40 ? "var(--yellow)" :
                         "var(--green)"
                     }}

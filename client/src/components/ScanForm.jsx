@@ -2,10 +2,12 @@ import { useState } from "react";
 
 export default function ScanForm({ onScan, loading }) {
   const [ip, setIp] = useState("");
+  const [scanType, setScanType] = useState("-sT");
 
   const handleSubmit = () => {
     if (!ip.trim()) return;
-    onScan(ip.trim());
+
+    onScan(ip.trim(), scanType); 
     setIp("");
   };
 
@@ -18,11 +20,13 @@ export default function ScanForm({ onScan, loading }) {
         onChange={(e) => setIp(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
       />
-      <select>
-        <option>-sT Fast</option>
-        <option>-sT Full</option>
-        <option>-sV Service</option>
+
+      <select value={scanType} onChange={(e) => setScanType(e.target.value)}>
+        <option value="-sT">TCP Connect (-sT Fast)</option>
+        <option value="-sS">SYN Scan (-sS Half)</option>
+        <option value="-sV">Service Scan (-sV)</option>
       </select>
+
       <button onClick={handleSubmit} disabled={loading}>
         {loading ? "SCANNING..." : "RUN SCAN"}
       </button>

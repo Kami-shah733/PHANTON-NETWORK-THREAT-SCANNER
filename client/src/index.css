@@ -18,7 +18,8 @@
   --accent:   #1f6feb;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; overflow-x: hidden;
+}
 
 body {
   background: var(--bg);
